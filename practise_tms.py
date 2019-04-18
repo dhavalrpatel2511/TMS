@@ -25,6 +25,9 @@ def fun(x,y,x0,yo):
     return distance
 values = fun(xc_2d,yc_2d,0,1)
 print(values)
-plt.pcolormesh(xv_2d,yv_2d,values)
+#plt.pcolormesh(xv_2d,yv_2d,values)
+#plt.colorbar()
+#plt.show()
+plt.imshow(values, origin='lower', extent=(-4,10,0,12))
 plt.colorbar()
 plt.show()
