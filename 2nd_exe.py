@@ -20,13 +20,15 @@ def edge_dislocation_zz(x,y,shear_modulus,poissons_ratio,burger_vector):
 shear_modulus = 90e9
 poissons_ratio = 0.3
 burger_vector = 0.25e-9
-
+#shear_modulus = float(input())
 x_start = -100e-9
 x_end = 100e-9
 y_start = -100e-9
 y_end = 100e-9
 x0 = 50e-9
 y0 = 20e-9
+x1 = 200e-9
+y1 = 150e-9
 n_pixelx = 50
 n_pixely = 50
 
@@ -55,10 +57,13 @@ sigma_zz = edge_dislocation_zz(xc_2d,yc_2d,shear_modulus,poissons_ratio,burger_v
 #plt.show()
 
 fig,ax=plt.subplots(nrows=2,ncols=3,figsize=(15,10))
-im_kwargs={'origin':'lower','extent':(x_start,x_end,y_start,y_end),'aspect':'equal','vmin':-0.1e9,'vmax':-0.1e9, 'cmap':'RdBu'}
+im_kwargs={'origin':'lower','extent':(x_start,x_end,y_start,y_end),'aspect':'equal','vmin':-0.1e9,'vmax':0.1e9, 'cmap':'RdBu'}
+
 im = ax[0][0].imshow(sigma_xy, **im_kwargs)
 cs = ax[0][0].contour(xc_2d,yc_2d,sigma_xy,levels=np.linspace(-0.1e9,0.1e9,11),cmap='YlOrRd_r')
 ax[0][0].clabel(cs, fmt='%1.1e')
+#plt.colorbar(im,ax=ax[0,0])
+
 im = ax[0][1].imshow(sigma_xx, **im_kwargs)
 cs = ax[0][1].contour(xc_2d,yc_2d,sigma_xx,levels=np.linspace(-0.1e9,0.1e9,11),cmap='YlOrRd_r')
 ax[0][1].clabel(cs, fmt='%1.1e')
@@ -76,8 +81,9 @@ cs = ax[1][2].contour(xc_2d,yc_2d,sigma_xy_1+sigma_xy,levels=np.linspace(-0.1e9,
 ax[1][2].clabel(cs, fmt='%1.1e')
 for i in range(2):
     for j in range(3):
-        fig.colorbar(im,ax=ax[i,j])
+       fig.colorbar(im,ax=ax[i,j])
 plt.show()
+
 
 #cs = plt.contour(xc_2d,yc_2d,sigma_xy,levels=np.linspace(-0.1e9,0.1e9,11),cmap='gray_r')
 #plt.clabel(cs, fmt='%1.1e')
